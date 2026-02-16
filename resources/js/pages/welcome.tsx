@@ -1,7 +1,6 @@
 import { Head, usePage } from '@inertiajs/react';
 import { LandingBanner } from '@/components/landing/landing-banner';
 import { LandingCtaDaftar } from '@/components/landing/landing-cta-daftar';
-import { LandingFooter } from '@/components/landing/landing-footer';
 import { LandingKerjaSama } from '@/components/landing/landing-kerja-sama';
 import { LandingJurusan } from '@/components/landing/landing-jurusan';
 import { LandingProfilSekolah } from '@/components/landing/landing-profil-sekolah';
@@ -31,7 +30,6 @@ export default function Welcome({
                 <LandingJurusan />
                 <LandingKerjaSama />
                 <LandingCtaDaftar />
-                <LandingFooter />
             </LandingLayout>
         </>
     );

@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { ChevronDown } from 'lucide-react';
 import { login, register } from '@/routes';
 import {
     DropdownMenu,
@@ -10,11 +11,18 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 const majors = [
-    'Rekayasa Perangkat Lunak',
-    'Teknik Komputer & Jaringan',
-    'Multimedia',
-    'Akuntansi',
-    'Bisnis Daring & Pemasaran',
+    {
+        label: 'Teknik Kendaraan Ringan',
+        slug: 'teknik-kendaraan-ringan',
+    },
+    {
+        label: 'Teknik Komputer dan Jaringan',
+        slug: 'teknik-komputer-dan-jaringan',
+    },
+    {
+        label: 'Akuntansi',
+        slug: 'akuntansi',
+    },
 ];
 
 export function LandingNavbar({ canRegister = true }: { canRegister?: boolean }) {
@@ -52,37 +60,33 @@ export function LandingNavbar({ canRegister = true }: { canRegister?: boolean })
                     <span>SMKN 7</span>
                 </Link>
                 <nav className="hidden items-center gap-6 text-sm font-medium lg:flex">
-                    <a
-                        href="#tentang-sekolah"
+                    <Link
+                        href="/tentang-sekolah"
                         className="transition-colors hover:text-foreground/70"
                     >
                         Tentang Sekolah
-                    </a>
+                    </Link>
                     <DropdownMenu>
                         <DropdownMenuTrigger className="inline-flex items-center gap-1 transition-colors hover:text-foreground/70">
                             Jurusan
-                            <span className="text-[10px]">▾</span>
+                            <ChevronDown className="h-4 w-4" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start" className="w-56">
                             {majors.map((major) => (
-                                <DropdownMenuItem key={major}>
-                                    {major}
+                                <DropdownMenuItem key={major.slug} asChild>
+                                    <Link href={`/jurusan/${major.slug}`}>
+                                        {major.label}
+                                    </Link>
                                 </DropdownMenuItem>
                             ))}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <a
-                        href="#sambutan"
-                        className="transition-colors hover:text-foreground/70"
-                    >
-                        Sambutan
-                    </a>
-                    <a
-                        href="#ekstrakulikuler"
+                    <Link
+                        href="/ekstrakulikuler"
                         className="transition-colors hover:text-foreground/70"
                     >
                         Ekstrakulikuler
-                    </a>
+                    </Link>
                     <Link
                         href={login()}
                         className="transition-colors hover:text-foreground/70"
@@ -129,19 +133,27 @@ export function LandingNavbar({ canRegister = true }: { canRegister?: boolean })
                             <ThemeToggle />
                         </div>
                         <div className="mt-6 flex flex-col gap-6 text-base font-medium">
-                            <a href="#tentang-sekolah">Tentang Sekolah</a>
+                            <Link href="/tentang-sekolah">
+                                Tentang Sekolah
+                            </Link>
                             <details className="group">
                                 <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-muted-foreground">
                                     Jurusan
                                 </summary>
                                 <div className="mt-3 flex flex-col gap-2 text-base text-foreground/80">
                                     {majors.map((major) => (
-                                        <span key={major}>{major}</span>
+                                        <Link
+                                            key={major.slug}
+                                            href={`/jurusan/${major.slug}`}
+                                        >
+                                            {major.label}
+                                        </Link>
                                     ))}
                                 </div>
                             </details>
-                            <a href="#sambutan">Sambutan</a>
-                            <a href="#ekstrakulikuler">Ekstrakulikuler</a>
+                            <Link href="/ekstrakulikuler">
+                                Ekstrakulikuler
+                            </Link>
                             <Link href={login()}>Login</Link>
                             {canRegister && (
                                 <Link

@@ -9,46 +9,28 @@ import {
 
 const jurusanList = [
     {
-        title: 'Rekayasa Perangkat Lunak',
-        description:
-            'Belajar pemrograman web, mobile, dan pengembangan aplikasi modern berbasis kebutuhan industri.',
-        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Kurikulum',
-    },
-    {
-        title: 'Teknik Komputer & Jaringan',
-        description:
-            'Fokus pada jaringan, keamanan, dan infrastruktur IT untuk dunia kerja berbasis teknologi.',
-        image: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Fasilitas',
-    },
-    {
-        title: 'Multimedia',
-        description:
-            'Produksi konten kreatif mulai dari desain grafis, video, hingga animasi dan branding.',
-        image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Galeri',
-    },
-    {
-        title: 'Akuntansi Keuangan',
-        description:
-            'Mengasah keterampilan laporan keuangan, perpajakan, dan manajemen administrasi bisnis.',
-        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Modul',
-    },
-    {
         title: 'Teknik Kendaraan Ringan',
         description:
             'Belajar perawatan dan perbaikan kendaraan modern dengan praktik di bengkel sekolah.',
         image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Workshop',
+        cta: 'Lihat Detail',
+        slug: 'teknik-kendaraan-ringan',
     },
     {
-        title: 'Tata Boga',
+        title: 'Teknik Komputer dan Jaringan',
         description:
-            'Mengeksplorasi dunia kuliner, pastry, dan manajemen dapur profesional.',
-        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
-        cta: 'Lihat Laboratorium',
+            'Fokus pada jaringan, keamanan, dan infrastruktur IT untuk dunia kerja berbasis teknologi.',
+        image: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Detail',
+        slug: 'teknik-komputer-dan-jaringan',
+    },
+    {
+        title: 'Akuntansi',
+        description:
+            'Mengasah keterampilan laporan keuangan, perpajakan, dan manajemen administrasi bisnis.',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Detail',
+        slug: 'akuntansi',
     },
 ];
 
@@ -93,12 +75,12 @@ export function LandingJurusan() {
                                             {jurusan.description}
                                         </p>
                                         <div className="mt-auto">
-                                            <button
-                                                type="button"
+                                            <a
+                                                href={`/jurusan/${jurusan.slug}`}
                                                 className="border border-primary/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary transition-colors hover:border-primary/60"
                                             >
                                                 {jurusan.cta}
-                                            </button>
+                                            </a>
                                         </div>
                                     </CardContent>
                                 </Card>

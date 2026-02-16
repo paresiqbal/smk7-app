@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import { LandingFooter } from '@/components/landing/landing-footer';
 import { LandingNavbar } from '@/components/landing/landing-navbar';
 
 interface LandingLayoutProps {
@@ -14,6 +15,7 @@ export function LandingLayout({
             <div className="flex w-full flex-col gap-10">
                 <LandingNavbar canRegister={canRegister} />
                 <main className="flex flex-col gap-12">{children}</main>
+                <LandingFooter />
             </div>
         </div>
     );
