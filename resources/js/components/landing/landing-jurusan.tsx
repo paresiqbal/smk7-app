@@ -1,137 +1,116 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from '@/components/ui/carousel';
 
-type JurusanItem = {
-    title: string;
-    description: string;
-    image: string;
-};
-
-const jurusanItems: JurusanItem[] = [
+const jurusanList = [
     {
         title: 'Rekayasa Perangkat Lunak',
         description:
-            'Fokus pada pengembangan aplikasi web, mobile, dan sistem informasi modern.',
-        image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80',
+            'Belajar pemrograman web, mobile, dan pengembangan aplikasi modern berbasis kebutuhan industri.',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Kurikulum',
     },
     {
         title: 'Teknik Komputer & Jaringan',
         description:
-            'Belajar instalasi, konfigurasi, dan manajemen jaringan skala sekolah hingga enterprise.',
-        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
+            'Fokus pada jaringan, keamanan, dan infrastruktur IT untuk dunia kerja berbasis teknologi.',
+        image: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Fasilitas',
     },
     {
         title: 'Multimedia',
         description:
-            'Produksi konten kreatif, desain grafis, video, dan animasi untuk industri digital.',
-        image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80',
+            'Produksi konten kreatif mulai dari desain grafis, video, hingga animasi dan branding.',
+        image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Galeri',
     },
     {
-        title: 'Akuntansi',
+        title: 'Akuntansi Keuangan',
         description:
-            'Menguasai laporan keuangan, perpajakan, dan sistem akuntansi berbasis software.',
-        image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1400&q=80',
+            'Mengasah keterampilan laporan keuangan, perpajakan, dan manajemen administrasi bisnis.',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Modul',
     },
     {
-        title: 'Bisnis Daring & Pemasaran',
+        title: 'Teknik Kendaraan Ringan',
         description:
-            'Strategi pemasaran digital, e-commerce, dan manajemen brand yang kompetitif.',
-        image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1400&q=80',
+            'Belajar perawatan dan perbaikan kendaraan modern dengan praktik di bengkel sekolah.',
+        image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Workshop',
+    },
+    {
+        title: 'Tata Boga',
+        description:
+            'Mengeksplorasi dunia kuliner, pastry, dan manajemen dapur profesional.',
+        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
+        cta: 'Lihat Laboratorium',
     },
 ];
 
 export function LandingJurusan() {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const cardsPerView = 3;
-    const items = useMemo(() => jurusanItems, []);
-    const maxIndex = Math.max(0, items.length - cardsPerView);
-
-    useEffect(() => {
-        if (activeIndex > maxIndex) {
-            setActiveIndex(maxIndex);
-        }
-    }, [activeIndex, maxIndex]);
-
-    const translatePercent = (100 / cardsPerView) * activeIndex;
-
     return (
-        <section className="flex flex-col gap-8">
-            <div className="flex flex-col gap-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
-                    Jurusan
-                </p>
-                <h2 className="text-2xl font-semibold lg:text-4xl">
-                    Jelajahi Jurusan Unggulan
-                </h2>
-                <p className="max-w-2xl text-sm text-muted-foreground">
-                    Pilih jurusan sesuai minatmu dan pelajari keterampilan yang
-                    dibutuhkan industri.
-                </p>
-            </div>
-
-            <div className="border border-border bg-card">
-                <div className="flex items-center justify-between gap-4 border-b border-border p-6">
-                    <div className="text-sm font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-                        Carousel Jurusan
-                    </div>
-                    <div className="flex gap-2">
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setActiveIndex((prev) => Math.max(0, prev - 1))
-                            }
-                            className="border border-border px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
-                            disabled={activeIndex === 0}
-                        >
-                            Sebelumnya
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setActiveIndex((prev) =>
-                                    Math.min(maxIndex, prev + 1),
-                                )
-                            }
-                            className="border border-border px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
-                            disabled={activeIndex === maxIndex}
-                        >
-                            Berikutnya
-                        </button>
-                    </div>
-                </div>
-                <div className="overflow-hidden p-6">
-                    <div
-                        className="flex gap-6 transition-transform duration-500"
-                        style={{ transform: `translateX(-${translatePercent}%)` }}
-                    >
-                        {items.map((item) => (
-                            <article
-                                key={item.title}
-                                className="flex basis-1/3 flex-col gap-4 border border-border bg-background p-4"
-                            >
-                                <div className="min-h-[160px] overflow-hidden border border-border bg-muted/30">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="h-full w-full object-cover"
-                                    />
-                                </div>
-                                <h3 className="text-lg font-semibold">
-                                    {item.title}
-                                </h3>
-                                <p className="text-sm leading-relaxed text-muted-foreground">
-                                    {item.description}
-                                </p>
-                                <button
-                                    type="button"
-                                    className="mt-auto w-fit border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary/50"
-                                >
-                                    Pelajari Jurusan
-                                </button>
-                            </article>
-                        ))}
-                    </div>
+        <section className="flex flex-col gap-6" id="jurusan">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+                <div className="flex flex-col gap-2">
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                        Jurusan Unggulan
+                    </p>
+                    <h2 className="text-2xl font-semibold lg:text-4xl">
+                        Pilihan Jurusan untuk Masa Depan
+                    </h2>
+                    <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                        Kurikulum kami disusun bersama industri agar siswa siap
+                        kerja, siap wirausaha, dan siap melanjutkan studi.
+                    </p>
                 </div>
             </div>
+            <Carousel opts={{ align: 'start' }} className="w-full">
+                <CarouselContent>
+                    {jurusanList.map((jurusan) => (
+                        <CarouselItem
+                            key={jurusan.title}
+                            className="basis-3/4 sm:basis-1/2 lg:basis-1/4"
+                        >
+                            <div className="p-1">
+                                <Card className="flex h-full flex-col overflow-hidden border-border">
+                                    <div className="h-36 w-full overflow-hidden bg-muted/20 lg:h-40">
+                                        <img
+                                            src={jurusan.image}
+                                            alt={jurusan.title}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    </div>
+                                    <CardContent className="flex flex-1 flex-col gap-3 p-5">
+                                        <h3 className="text-lg font-semibold">
+                                            {jurusan.title}
+                                        </h3>
+                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                            {jurusan.description}
+                                        </p>
+                                        <div className="mt-auto">
+                                            <button
+                                                type="button"
+                                                className="border border-primary/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary transition-colors hover:border-primary/60"
+                                            >
+                                                {jurusan.cta}
+                                            </button>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <div className="mt-3 flex items-center justify-end gap-2">
+                    <CarouselPrevious className="static translate-y-0 bg-background shadow-sm" />
+                    <CarouselNext className="static translate-y-0 bg-background shadow-sm" />
+                </div>
+            </Carousel>
         </section>
     );
 }
