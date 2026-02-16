@@ -1,0 +1,160 @@
+import { Link } from '@inertiajs/react';
+import { login, register } from '@/routes';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { ThemeToggle } from '@/components/theme-toggle';
+
+const majors = [
+    'Rekayasa Perangkat Lunak',
+    'Teknik Komputer & Jaringan',
+    'Multimedia',
+    'Akuntansi',
+    'Bisnis Daring & Pemasaran',
+];
+
+export function LandingNavbar({ canRegister = true }: { canRegister?: boolean }) {
+    return (
+        <header className="w-full">
+            <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 dark:border-white/10">
+                <Link
+                    href="/"
+                    className="flex items-center gap-3 text-base font-semibold tracking-tight"
+                >
+                    <span className="flex h-9 w-9 items-center justify-center border border-black/10 bg-black/5 dark:border-white/10 dark:bg-white/10">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            className="text-foreground"
+                        >
+                            <path
+                                d="M4 10.5L12 6l8 4.5V20a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1v-9.5Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinejoin="round"
+                            />
+                            <path
+                                d="M3 10.5L12 5l9 5.5"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </span>
+                    <span>SMKN 7</span>
+                </Link>
+                <nav className="hidden items-center gap-6 text-sm font-medium lg:flex">
+                    <a
+                        href="#tentang-sekolah"
+                        className="transition-colors hover:text-foreground/70"
+                    >
+                        Tentang Sekolah
+                    </a>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="inline-flex items-center gap-1 transition-colors hover:text-foreground/70">
+                            Jurusan
+                            <span className="text-[10px]">▾</span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" className="w-56">
+                            {majors.map((major) => (
+                                <DropdownMenuItem key={major}>
+                                    {major}
+                                </DropdownMenuItem>
+                            ))}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    <a
+                        href="#sambutan"
+                        className="transition-colors hover:text-foreground/70"
+                    >
+                        Sambutan
+                    </a>
+                    <a
+                        href="#ekstrakulikuler"
+                        className="transition-colors hover:text-foreground/70"
+                    >
+                        Ekstrakulikuler
+                    </a>
+                    <Link
+                        href={login()}
+                        className="transition-colors hover:text-foreground/70"
+                    >
+                        Login
+                    </Link>
+                    {canRegister && (
+                        <Link
+                            href={register()}
+                            className="border border-primary/20 px-4 py-1.5 text-sm font-semibold text-primary transition-colors hover:border-primary/40"
+                        >
+                            Daftar Sekarang
+                        </Link>
+                    )}
+                    <ThemeToggle />
+                </nav>
+                <Sheet>
+                    <SheetTrigger
+                        className="inline-flex h-10 w-10 items-center justify-center border border-black/10 lg:hidden dark:border-white/10"
+                        aria-label="Open menu"
+                    >
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            className="text-foreground"
+                        >
+                            <path
+                                d="M4 7h16M4 12h16M4 17h16"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="square"
+                            />
+                        </svg>
+                    </SheetTrigger>
+                    <SheetContent
+                        side="right"
+                        className="h-full w-full border-0 p-6 sm:max-w-none"
+                    >
+                        <div className="mt-6 flex items-center justify-end">
+                            <ThemeToggle />
+                        </div>
+                        <div className="mt-6 flex flex-col gap-6 text-base font-medium">
+                            <a href="#tentang-sekolah">Tentang Sekolah</a>
+                            <details className="group">
+                                <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-muted-foreground">
+                                    Jurusan
+                                </summary>
+                                <div className="mt-3 flex flex-col gap-2 text-base text-foreground/80">
+                                    {majors.map((major) => (
+                                        <span key={major}>{major}</span>
+                                    ))}
+                                </div>
+                            </details>
+                            <a href="#sambutan">Sambutan</a>
+                            <a href="#ekstrakulikuler">Ekstrakulikuler</a>
+                            <Link href={login()}>Login</Link>
+                            {canRegister && (
+                                <Link
+                                    href={register()}
+                                    className="border border-primary/20 px-4 py-2 text-center font-semibold text-primary"
+                                >
+                                    Daftar Sekarang
+                                </Link>
+                            )}
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
+        </header>
+    );
+}
